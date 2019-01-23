@@ -2,16 +2,20 @@
 
 ## Server side
 
-```npm i
+```
+npm i
 ```
 
-```node app.js
+```
+node app.js
 ```
 
 ## Client side
 
-```npm i
+```
+npm i
 ```
 
-```ng serve
+```
+ng serve
 ```
