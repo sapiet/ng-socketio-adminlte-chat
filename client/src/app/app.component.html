@@ -1,0 +1,90 @@
+<div *ngIf="!logged" class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a><b>Chat</b>IO</a>
+        </div>
+        <div class="login-box-body">
+            <p class="login-box-msg">Connectez-vous</p>
+
+            <form (submit)="login()">
+                <div class="form-group has-feedback">
+                    <input type="text" name="username" [(ngModel)]="user.username" class="form-control" placeholder="Nom d'utilisateur">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="email" name="mail" [(ngModel)]="user.mail" class="form-control" placeholder="Adresse mail">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Se connecter</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="logged" class="container">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+
+            <div class="box box-warning direct-chat direct-chat-warning">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Direct Chat</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
+                            <i class="fa fa-comments"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="direct-chat-messages">
+                        <div class="direct-chat-msg{{ message.user.username == user.username ? ' right' : '' }}" *ngFor="let message of messages">
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-left">
+                                    {{ message.user.username }}
+                                </span>
+                                <span class="direct-chat-timestamp pull-right">
+                                    {{ message.date }}
+                                </span>
+                            </div>
+
+                            <img class="direct-chat-img" src="{{ message.user.avatar }}" alt="{{ message.user.username }}">
+
+                            <div class="direct-chat-text">
+                                {{ message.content }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="direct-chat-contacts">
+                        <ul class="contacts-list">
+                            <li *ngFor="let user of users">
+                                <a>
+                                    <img class="contacts-list-img" src="{{ user.avatar }}" alt="{{ user.username }}">
+
+                                    <div class="contacts-list-info">
+                                        <span class="contacts-list-name">
+                                            {{ user.username }}
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <form (submit)="sendMessage()">
+                        <div class="input-group">
+                            <input type="text" name="currentMessage" [(ngModel)]="currentMessage" placeholder="Message ..." class="form-control">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-warning btn-flat">Envoyer</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
